@@ -1,6 +1,6 @@
 ﻿<div class="container body-content">
 
-    <h1>@ViewBag.title</h1>
+    @*<h1>@ViewBag.title</h1>*@
 
     <form action="/search/results" method="post">
         <h2>Search by:</h2>
@@ -27,7 +27,26 @@
     <hr />
 
     @{
-        //TODO #4: Loop over the search results to display all job fields.
+//TODO #4: Loop over the search results to display all job fields.
+@**@
+    if (ViewBag.jobs != null)
+    {
+        <h3>@ViewBag.title</h3>
+        <table class="job-listing">
+            @foreach (var job in ViewBag.jobs)
+            {
+            <tr>
+                <td>@job.Name</td>
+                <td>@job.Employer</td>
+                <td>@job.Location</td>
+                <td>@job.PositionType</td>
+                <td>@job.CoreCompetency</td>
+                <td></td>
+            </tr>
+
+            }
+        </table>
+        }
     }
 
 </div>
