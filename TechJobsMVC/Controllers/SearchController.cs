@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using TechJobsMVC.Data;
 using TechJobsMVC.Models;
 
-
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace TechJobsMVC.Controllers
@@ -22,13 +21,14 @@ namespace TechJobsMVC.Controllers
 
         // TODO #3: Create an action method to process a search request and render the updated search view.
 
-        [HttpPost]
-        [Route("/search/results")]
+        [HttpPost] //apparently this is unnecessary
+        [Route("/search/results")] //apparently this is unnecessary
         public IActionResult Results(string searchTerm, string searchType)
         {
             List<Job> jobs;
-            //jobs = JobData.FindByColumnAndValue(searchType, searchTerm); 
             ViewBag.title = "Jobs with " + ListController.ColumnChoices[searchType] + ": " + searchTerm;
+            
+            //noticed that cannot use if (searchTerm == "")
             if (String.IsNullOrEmpty(searchTerm))
             {
                 jobs = JobData.FindAll();
@@ -37,12 +37,10 @@ namespace TechJobsMVC.Controllers
             {
                 jobs = JobData.FindByColumnAndValue(searchType, searchTerm);
             }
-            ViewBag.jobs = jobs;
             
+            ViewBag.jobs = jobs;
             ViewBag.columns = ListController.ColumnChoices;
-
             return View("index");
-
         }
     }
 }
